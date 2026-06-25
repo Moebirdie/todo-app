@@ -10,128 +10,68 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/style.css" />
-  <title>Work Day Scheduler</title>
+  <title>To-Do List</title>
 </head>
 
 <body>
+
   <header class="p-5 mb-4 border-5 border-bottom border-dark text-center">
-    <h1 class="display-3">Work Day Scheduler</h1>
-    <p class="lead">A simple calendar app for scheduling your work day</p>
+    <h1 class="display-3">To-Do List</h1>
+    <p class="lead">Stay on top of your tasks</p>
     <p id="currentDay" class="lead"></p>
   </header>
 
-  <div id="calendarcontainer" class="container-lg px-5">
-    <!-- Start: A one hour time block that can be copied to add additional time slots -->
-    <div id="hour-8" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">8AM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
-    </div>
-    <!-- End of one  hour time block that can be copied to add additional time slots -->
+  <div class="container-lg px-5">
 
-    <div id="hour-9" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">9AM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
-    </div>
-
-    <div id="hour-10" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">10AM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
+    <!-- Add task form -->
+    <div class="row mb-4">
+      <div class="col-12 col-md-8 offset-md-2">
+        <div class="input-group">
+          <input type="text" id="taskInput" class="form-control task-input" placeholder="Add a new task..." />
+          <select id="prioritySelect" class="form-select priority-select">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button class="btn add-btn" id="addBtn">
+            <i class="fas fa-plus" aria-hidden="true"></i> Add
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div id="hour-11" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">11AM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
+    <!-- Filter buttons -->
+    <div class="row mb-3">
+      <div class="col-12 col-md-8 offset-md-2 text-center filter-btns">
+        <button class="btn filter-btn active" data-filter="all">All</button>
+        <button class="btn filter-btn" data-filter="active">Active</button>
+        <button class="btn filter-btn" data-filter="completed">Completed</button>
+      </div>
     </div>
 
-    <div id="hour-12" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">12PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
+    <!-- Task list -->
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2">
+        <ul id="taskList" class="list-unstyled"></ul>
+        <p id="emptyMsg" class="text-center text-muted mt-4" style="display:none;">No tasks yet — add one above!</p>
+      </div>
     </div>
 
-    <div id="hour-13" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">1PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
+    <!-- Footer actions -->
+    <div class="row mt-3">
+      <div class="col-12 col-md-8 offset-md-2 d-flex justify-content-between align-items-center">
+        <span id="taskCount" class="text-muted small"></span>
+        <button id="clearCompletedBtn" class="btn clear-btn">
+          <i class="fas fa-trash"></i> Clear completed
+        </button>
+      </div>
     </div>
 
-    <div id="hour-14" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">2PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
-    </div>
-
-    <div id="hour-15" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">3PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
-    </div>
-
-    <div id="hour-16" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">4PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
-    </div>
-
-    <div id="hour-17" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">5PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
-    </div>
-
-    <div id="hour-18" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">6PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
-    </div>
-
-    <div id="hour-19" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">7PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
-    </div>
-
-    <div id="hour-20" class="row time-block">
-      <div class="col-2 col-md-1 hour text-center py-3">8PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-        <i class="fas fa-save" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div class="clearbtn-container"><button id='clearBtn'><i class="fas fa-trash"></i>clear all</button></div>
   </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 
-    <script src="./assets/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  <script src="./assets/script.js"></script>
 </body>
 
 </html>
